@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 
 namespace ProNatur_Biomarkt_GmbH
@@ -18,6 +10,8 @@ namespace ProNatur_Biomarkt_GmbH
     {
 
         private SqlConnection databaseConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\ChristophLichtblau\OneDrive - QESTIT\Dokumente\Pro-Natur Biomarkt GmbH.mdf;Integrated Security = True; Connect Timeout = 30");
+
+        private int lastSelectedProductKey;
 
         public ProductsScreen()
         {
@@ -42,26 +36,20 @@ namespace ProNatur_Biomarkt_GmbH
                 return;
             }        
             
-            String productName = textBoxProductName.Text;
-            String productBrand = textBoxProductBrand.Text;
-            String productCategory = comboBoxProductCategory.Text;
-            float productPrice;
-            if (float.TryParse(textBoxProductPrice.Text, out productPrice) && textBoxProductPrice.Text != "")
-            {
-            }
-            else {
+            string productName = textBoxProductName.Text;
+            string productBrand = textBoxProductBrand.Text;
+            string productCategory = comboBoxProductCategory.Text;
+            string productPrice = textBoxProductPrice.Text;
+
+            if (textBoxProductPrice.Text == "")
+            { 
                 MessageBox.Show("Der Preis beinhaltet ungültige Zeichen oder ist leer!");
                 return;
             }
 
-            databaseConnection.Open();
-
-            string query = string.Format("insert into Products values('{0}','{1}','{2}','{3}')",productName, productBrand,productCategory ,productPrice);
-             
-            SqlCommand sqlCommand = databaseConnection.CreateCommand();
-            sqlCommand.ExecuteNonQuery();
-
-            databaseConnection.Close();
+            string query = string.Format("insert into Products values('{0}','{1}','{2}','{3}')"
+                , productName, productBrand, productCategory, productPrice);
+            ExecuteQuery(query);
 
             ClearAllFields();
             ShowProducts();
@@ -69,7 +57,20 @@ namespace ProNatur_Biomarkt_GmbH
 
         private void btnProductEdit_Click(object sender, EventArgs e)
         {
+            if (lastSelectedProductKey == 0)
+            {
+                MessageBox.Show("Bitte wähle zuerst ein Produkt aus!");
+                return;
+            }
+            string productName = textBoxProductName.Text;
+            string productBrand = textBoxProductBrand.Text;
+            string productCategory = comboBoxProductCategory.Text;
+            string productPrice = textBoxProductPrice.Text;
 
+            String query = string.Format("update Products set Name='{0}', Brand='{1}', Category='{2}', Price='{3}' where Id={4}"
+                , productName, productBrand, productCategory, productPrice, lastSelectedProductKey);
+            ExecuteQuery(query);
+           
             ShowProducts();
         }
 
@@ -80,7 +81,13 @@ namespace ProNatur_Biomarkt_GmbH
 
         private void btnProductDelete_Click(object sender, EventArgs e)
         {
+            if (lastSelectedProductKey == 0) {
+                MessageBox.Show("Bitte wähle zuerst ein Produkt aus!");
+            }
+            string query = string.Format("delete from Products where Id={0};", lastSelectedProductKey);
+            ExecuteQuery(query);
 
+            ClearAllFields();
             ShowProducts();
         }
 
@@ -91,6 +98,16 @@ namespace ProNatur_Biomarkt_GmbH
             textBoxProductPrice.Text = "";
             comboBoxProductCategory.Text = "";
             comboBoxProductCategory.SelectedItem = null;
+        }
+
+        private void ExecuteQuery(string query) {
+
+            databaseConnection.Open();
+
+            SqlCommand sqlCommand = new SqlCommand(query, databaseConnection);
+            sqlCommand.ExecuteNonQuery();
+
+            databaseConnection.Close();
         }
 
         private void ShowProducts() {
@@ -107,6 +124,16 @@ namespace ProNatur_Biomarkt_GmbH
             productsDGV.Columns[0].Visible = false;
 
             databaseConnection.Close();
+        }
+
+        private void productsDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            textBoxProductName.Text = productsDGV.SelectedRows[0].Cells[1].Value.ToString();
+            textBoxProductBrand.Text = productsDGV.SelectedRows[0].Cells[2].Value.ToString();
+            comboBoxProductCategory.Text = productsDGV.SelectedRows[0].Cells[3].Value.ToString();
+            textBoxProductPrice.Text = productsDGV.SelectedRows[0].Cells[4].Value.ToString();
+
+            lastSelectedProductKey = (int)productsDGV.SelectedRows[0].Cells[0].Value;
         }
     }
 }
