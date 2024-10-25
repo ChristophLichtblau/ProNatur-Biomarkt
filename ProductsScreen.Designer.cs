@@ -30,13 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductsScreen));
             this.labelName = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.textBoxMarke = new System.Windows.Forms.TextBox();
+            this.textBoxProductName = new System.Windows.Forms.TextBox();
+            this.textBoxProductBrand = new System.Windows.Forms.TextBox();
             this.labelMarke = new System.Windows.Forms.Label();
             this.labelKategorie = new System.Windows.Forms.Label();
-            this.textBoxPreis = new System.Windows.Forms.TextBox();
+            this.textBoxProductPrice = new System.Windows.Forms.TextBox();
             this.labelPreis = new System.Windows.Forms.Label();
-            this.comboBoxKategorie = new System.Windows.Forms.ComboBox();
+            this.comboBoxProductCategory = new System.Windows.Forms.ComboBox();
+            this.btnProductSave = new System.Windows.Forms.Button();
+            this.btnProductEdit = new System.Windows.Forms.Button();
+            this.btnProductClear = new System.Windows.Forms.Button();
+            this.btnProductDelete = new System.Windows.Forms.Button();
+            this.productsDGV = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.productsDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // labelName
@@ -51,25 +57,25 @@
             this.labelName.TabIndex = 0;
             this.labelName.Text = "Name";
             // 
-            // textBoxName
+            // textBoxProductName
             // 
-            this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.textBoxName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxName.ForeColor = System.Drawing.Color.White;
-            this.textBoxName.Location = new System.Drawing.Point(91, 16);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(149, 20);
-            this.textBoxName.TabIndex = 1;
+            this.textBoxProductName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.textBoxProductName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxProductName.ForeColor = System.Drawing.Color.White;
+            this.textBoxProductName.Location = new System.Drawing.Point(91, 16);
+            this.textBoxProductName.Name = "textBoxProductName";
+            this.textBoxProductName.Size = new System.Drawing.Size(316, 20);
+            this.textBoxProductName.TabIndex = 1;
             // 
-            // textBoxMarke
+            // textBoxProductBrand
             // 
-            this.textBoxMarke.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.textBoxMarke.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxMarke.ForeColor = System.Drawing.Color.White;
-            this.textBoxMarke.Location = new System.Drawing.Point(91, 42);
-            this.textBoxMarke.Name = "textBoxMarke";
-            this.textBoxMarke.Size = new System.Drawing.Size(149, 20);
-            this.textBoxMarke.TabIndex = 3;
+            this.textBoxProductBrand.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.textBoxProductBrand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxProductBrand.ForeColor = System.Drawing.Color.White;
+            this.textBoxProductBrand.Location = new System.Drawing.Point(91, 42);
+            this.textBoxProductBrand.Name = "textBoxProductBrand";
+            this.textBoxProductBrand.Size = new System.Drawing.Size(149, 20);
+            this.textBoxProductBrand.TabIndex = 3;
             // 
             // labelMarke
             // 
@@ -95,15 +101,15 @@
             this.labelKategorie.TabIndex = 4;
             this.labelKategorie.Text = "Kategorie";
             // 
-            // textBoxPreis
+            // textBoxProductPrice
             // 
-            this.textBoxPreis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.textBoxPreis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxPreis.ForeColor = System.Drawing.Color.White;
-            this.textBoxPreis.Location = new System.Drawing.Point(91, 94);
-            this.textBoxPreis.Name = "textBoxPreis";
-            this.textBoxPreis.Size = new System.Drawing.Size(149, 20);
-            this.textBoxPreis.TabIndex = 7;
+            this.textBoxProductPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.textBoxProductPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxProductPrice.ForeColor = System.Drawing.Color.White;
+            this.textBoxProductPrice.Location = new System.Drawing.Point(91, 94);
+            this.textBoxProductPrice.Name = "textBoxProductPrice";
+            this.textBoxProductPrice.Size = new System.Drawing.Size(75, 20);
+            this.textBoxProductPrice.TabIndex = 7;
             // 
             // labelPreis
             // 
@@ -117,23 +123,94 @@
             this.labelPreis.TabIndex = 6;
             this.labelPreis.Text = "Preis";
             // 
-            // comboBoxKategorie
+            // comboBoxProductCategory
             // 
-            this.comboBoxKategorie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.comboBoxKategorie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxKategorie.ForeColor = System.Drawing.Color.White;
-            this.comboBoxKategorie.FormattingEnabled = true;
-            this.comboBoxKategorie.Items.AddRange(new object[] {
+            this.comboBoxProductCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.comboBoxProductCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxProductCategory.ForeColor = System.Drawing.Color.White;
+            this.comboBoxProductCategory.FormattingEnabled = true;
+            this.comboBoxProductCategory.Items.AddRange(new object[] {
             "Obst",
             "Gemüse",
             "Fleisch",
             "Fisch",
             "Drogerie",
             "Getränke"});
-            this.comboBoxKategorie.Location = new System.Drawing.Point(91, 67);
-            this.comboBoxKategorie.Name = "comboBoxKategorie";
-            this.comboBoxKategorie.Size = new System.Drawing.Size(149, 21);
-            this.comboBoxKategorie.TabIndex = 8;
+            this.comboBoxProductCategory.Location = new System.Drawing.Point(91, 67);
+            this.comboBoxProductCategory.Name = "comboBoxProductCategory";
+            this.comboBoxProductCategory.Size = new System.Drawing.Size(149, 21);
+            this.comboBoxProductCategory.TabIndex = 8;
+            // 
+            // btnProductSave
+            // 
+            this.btnProductSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnProductSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProductSave.ForeColor = System.Drawing.Color.White;
+            this.btnProductSave.Location = new System.Drawing.Point(91, 120);
+            this.btnProductSave.Name = "btnProductSave";
+            this.btnProductSave.Size = new System.Drawing.Size(75, 23);
+            this.btnProductSave.TabIndex = 9;
+            this.btnProductSave.Text = "Speichern";
+            this.btnProductSave.UseVisualStyleBackColor = false;
+            this.btnProductSave.Click += new System.EventHandler(this.btnProductSave_Click);
+            // 
+            // btnProductEdit
+            // 
+            this.btnProductEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnProductEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProductEdit.ForeColor = System.Drawing.Color.White;
+            this.btnProductEdit.Location = new System.Drawing.Point(170, 120);
+            this.btnProductEdit.Name = "btnProductEdit";
+            this.btnProductEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnProductEdit.TabIndex = 10;
+            this.btnProductEdit.Text = "Bearbeiten";
+            this.btnProductEdit.UseVisualStyleBackColor = false;
+            this.btnProductEdit.Click += new System.EventHandler(this.btnProductEdit_Click);
+            // 
+            // btnProductClear
+            // 
+            this.btnProductClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnProductClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProductClear.ForeColor = System.Drawing.Color.White;
+            this.btnProductClear.Location = new System.Drawing.Point(248, 120);
+            this.btnProductClear.Name = "btnProductClear";
+            this.btnProductClear.Size = new System.Drawing.Size(80, 23);
+            this.btnProductClear.TabIndex = 11;
+            this.btnProductClear.Text = "Felder leeren";
+            this.btnProductClear.UseVisualStyleBackColor = false;
+            this.btnProductClear.Click += new System.EventHandler(this.btnProductClear_Click);
+            // 
+            // btnProductDelete
+            // 
+            this.btnProductDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnProductDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProductDelete.ForeColor = System.Drawing.Color.White;
+            this.btnProductDelete.Location = new System.Drawing.Point(332, 120);
+            this.btnProductDelete.Name = "btnProductDelete";
+            this.btnProductDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnProductDelete.TabIndex = 12;
+            this.btnProductDelete.Text = "Löschen";
+            this.btnProductDelete.UseVisualStyleBackColor = false;
+            this.btnProductDelete.Click += new System.EventHandler(this.btnProductDelete_Click);
+            // 
+            // productsDGV
+            // 
+            this.productsDGV.AllowUserToAddRows = false;
+            this.productsDGV.AllowUserToDeleteRows = false;
+            this.productsDGV.AllowUserToResizeColumns = false;
+            this.productsDGV.AllowUserToResizeRows = false;
+            this.productsDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.productsDGV.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.productsDGV.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.productsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productsDGV.Location = new System.Drawing.Point(9, 148);
+            this.productsDGV.Name = "productsDGV";
+            this.productsDGV.RowHeadersVisible = false;
+            this.productsDGV.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.productsDGV.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.productsDGV.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.productsDGV.Size = new System.Drawing.Size(784, 306);
+            this.productsDGV.TabIndex = 13;
             // 
             // ProductsScreen
             // 
@@ -141,19 +218,25 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(799, 461);
-            this.Controls.Add(this.comboBoxKategorie);
-            this.Controls.Add(this.textBoxPreis);
+            this.Controls.Add(this.productsDGV);
+            this.Controls.Add(this.btnProductDelete);
+            this.Controls.Add(this.btnProductClear);
+            this.Controls.Add(this.btnProductEdit);
+            this.Controls.Add(this.btnProductSave);
+            this.Controls.Add(this.comboBoxProductCategory);
+            this.Controls.Add(this.textBoxProductPrice);
             this.Controls.Add(this.labelPreis);
             this.Controls.Add(this.labelKategorie);
-            this.Controls.Add(this.textBoxMarke);
+            this.Controls.Add(this.textBoxProductBrand);
             this.Controls.Add(this.labelMarke);
-            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.textBoxProductName);
             this.Controls.Add(this.labelName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ProductsScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Produkte";
+            ((System.ComponentModel.ISupportInitialize)(this.productsDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,12 +245,17 @@
         #endregion
 
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.TextBox textBoxMarke;
+        private System.Windows.Forms.TextBox textBoxProductName;
+        private System.Windows.Forms.TextBox textBoxProductBrand;
         private System.Windows.Forms.Label labelMarke;
         private System.Windows.Forms.Label labelKategorie;
-        private System.Windows.Forms.TextBox textBoxPreis;
+        private System.Windows.Forms.TextBox textBoxProductPrice;
         private System.Windows.Forms.Label labelPreis;
-        private System.Windows.Forms.ComboBox comboBoxKategorie;
+        private System.Windows.Forms.ComboBox comboBoxProductCategory;
+        private System.Windows.Forms.Button btnProductSave;
+        private System.Windows.Forms.Button btnProductEdit;
+        private System.Windows.Forms.Button btnProductClear;
+        private System.Windows.Forms.Button btnProductDelete;
+        private System.Windows.Forms.DataGridView productsDGV;
     }
 }
